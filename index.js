@@ -5,6 +5,8 @@ require("dotenv").config();
 const connectDB = require("./config/db");
 const router = require("./routes");
 
+const path = require("path");
+
 const app = express();
 app.use(
   cors({
@@ -22,6 +24,11 @@ app.get("/", (req, res) => {
 app.use("/api", router);
 
 const PORT = 8080 || process.env.PORT;
+
+app.get("/", (req, res) => {
+  app.use(express.static(path.resolve(__dirname, "frontend", "build")));
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+});
 
 connectDB().then(() => {
   app.listen(PORT, () => {
