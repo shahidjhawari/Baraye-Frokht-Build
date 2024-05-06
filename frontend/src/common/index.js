@@ -1,4 +1,4 @@
-const backendDomin = "http://localhost:8080"
+const backendDomin = '${window.location.origin}'
 
 const SummaryApi = {
     signUP : {
